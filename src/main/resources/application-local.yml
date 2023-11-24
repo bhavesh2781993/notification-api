@@ -1,14 +1,20 @@
+# Database Connection
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/notification
-    username: root
-    password: root
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/notificationdb?prepareThreshold=0
+    username: notification-api
+    password: notification
   jpa:
     show-sql: true
     properties:
       hibernate:
         format_sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
 
+# Email Configurations
 spring.mail:
   host: sandbox.smtp.mailtrap.io
   port: 587
@@ -19,6 +25,7 @@ spring.mail:
       auth: true
       starttls.enabled: true
 
+# Sender Email ID
 notification:
   email:
     from: test@gmail.com

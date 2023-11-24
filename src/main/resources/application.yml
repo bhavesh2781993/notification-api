@@ -1,10 +1,5 @@
 server.port: 9090
 
-spring.profiles:
-  active: local
-
-spring.application:
-  name: notification-api
-
-spring.freemarker:
-  suffix: .ftlh
+spring.profiles.active: local
+spring.application.name: notification-api
+spring.freemarker.suffix: .ftlh
