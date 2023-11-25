@@ -13,10 +13,12 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>notification-api</name>
     <description>Notification API to send Email / SMS Notifications through various providers</description>
+
     <properties>
         <java.version>17</java.version>
         <spotbugs.maven.plugin>4.7.2.1</spotbugs.maven.plugin>
         <checkstyle.maven.plugin>3.2.1</checkstyle.maven.plugin>
+        <springdoc-openapi-version>2.2.0</springdoc-openapi-version>
     </properties>
 
     <dependencies>
@@ -51,6 +53,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
+
+        <!-- Swagger UI Documentation -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>${springdoc-openapi-version}</version>
         </dependency>
 
         <!-- Utility -->

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 public class EmailNotificationManager {
     
     private final EmailNotificationContext emailNotificationContext;
-    
     private final JavaMailNotificationStrategy javaMailNotificationStrategy;
     
     public void send(final EmailNotification emailNotification) {
