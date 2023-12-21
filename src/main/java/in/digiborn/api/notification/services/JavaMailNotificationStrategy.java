@@ -1,9 +1,5 @@
 package in.digiborn.api.notification.services;
 
-import in.digiborn.api.notification.configs.NotificationProperties;
-import in.digiborn.api.notification.models.EmailNotification;
-import in.digiborn.api.notification.models.Template;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -15,6 +11,9 @@ import java.io.StringWriter;
 
 import freemarker.template.Configuration;
 import freemarker.template.TemplateException;
+import in.digiborn.api.notification.configs.NotificationProperties;
+import in.digiborn.api.notification.models.EmailNotification;
+import in.digiborn.api.notification.models.Template;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 
@@ -52,7 +51,7 @@ public class JavaMailNotificationStrategy implements EmailNotificationStrategy {
     private String getEmailContent(final EmailNotification notification) throws IOException, TemplateException {
         final Template template = notification.getTemplate();
         final StringWriter stringWriter = new StringWriter();
-        freemarkerConfiguration.getTemplate(template.getName() + ".ftlh").process(template.getVars(), stringWriter);
+        freemarkerConfiguration.getTemplate(template.getName() + ".ftlh").process(template.getBodyVars(), stringWriter);
         return stringWriter.getBuffer().toString();
     }
 

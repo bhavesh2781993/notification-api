@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  notification_api:
+    image: bhavesh2781993/digiborn-notification-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 9091:9090
+    environment:
+      - JAVA_OPTS=-Dspring.profiles.active=docker
+  postgresql_db:
+    image: postgres:15.4-alpine
+    restart: always
+    ports:
+      - 5434:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=notificationdb
+      - POSTGRES_USER=notification-api
+      - POSTGRES_PASSWORD=notification
+      - PGDATA=/var/lib/postgresql/data/pgdata
+
+volumes:
+  postgres_data:

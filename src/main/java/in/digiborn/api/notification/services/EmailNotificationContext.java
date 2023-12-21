@@ -1,9 +1,9 @@
 package in.digiborn.api.notification.services;
 
-import in.digiborn.api.notification.models.EmailNotification;
-
 import lombok.Setter;
 import org.springframework.stereotype.Service;
+
+import in.digiborn.api.notification.models.EmailNotification;
 
 @Service
 class EmailNotificationContext {

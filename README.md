@@ -2,15 +2,35 @@
 
 ## Description
 
-This is a utility API for Email / SMS Notifications.
+This application provides utility APIs to send Email & SMS Notifications through various providers.
 
-## Installation
+## Getting Started 
 
-* Java Version: `17`
-* Build Tool: `Maven`
-* Build Steps:
-  * test: `maven clean test`
-  * build: `maven clean install`
+### Manually:
+- Installation:
+  - Java Version: `17`
+  - Build Tool: `Maven`
+  - Database: `Postgresql:15`
+
+- Run Application:
+  * Test: `mvn clean test`
+  * Build: `mvn clean install` 
+  * Run application file: `NotificationApiApplication.java`
+
+### Using Docker-Compose:
+- Installation:
+  * Docker Desktop for `Mac / Windows / Linux`
+
+- Start Application:
+  * Build Application: `mvn clean install`
+  * Start Application: `docker compose up --build`
+  * Terminate Application and Delete Containers: `docker compose down`
+
+- Clean Up:
+  1. Remove Volumes & Images : `docker compose down -v --rmi all`
+
+## Documentation
+- [Swagger - API Documentation](http://localhost:9090/swagger-ui/index.html)
 
 ## Support
 
@@ -18,10 +38,19 @@ This is a utility API for Email / SMS Notifications.
 
 ## Roadmap
 
-* WIP Features:
-  * Email Notifications with various providers like SES, Java Mail Client, SendGrid.
-* Future:
-  * SMS Notifications with various providers like Twilio, Message91
+#### Completed:
+- Email Notification:
+  - [x] `JAVA MAIL CLIENT`
+
+#### WIP:
+- Email Notifications:
+  - [ ] `SES`
+  - [ ] `SENDGRID`
+
+#### Future:
+- SMS Notifications:
+  - [ ] `Twilio` 
+  - [ ] `Message91`
 
 ## Contributing
 
@@ -40,5 +69,3 @@ This is a utility API for Email / SMS Notifications.
 ## License
 
 Open Source: `MIT`
-
-## Project status: `WIP`

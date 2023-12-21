@@ -1,0 +1,32 @@
+# Database Connection
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://postgresql_db:5432/notificationdb?prepareThreshold=0
+    username: notification-api
+    password: notification
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+
+# Email Configurations
+spring.mail:
+  host: sandbox.smtp.mailtrap.io
+  port: 587
+  username: 1
+  password: 1
+  properties:
+    mail.smtp:
+      auth: true
+      starttls.enabled: true
+
+# Sender Email ID
+notification:
+  email:
+    from: test@gmail.com
+

@@ -1,11 +1,11 @@
 package in.digiborn.api.notification.models;
 
-import in.digiborn.api.notification.models.constants.NotificationType;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+
+import in.digiborn.api.notification.models.constants.NotificationType;
 
 @Getter
 @Setter

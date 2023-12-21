@@ -16,31 +16,19 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/email")
-@Tag(name = "Email Notification")
+@Tag(name = "Email Notification APIs")
 public class EmailNotificationController {
 
     private final EmailNotificationManager emailNotificationManager;
 
     @Operation(
-        summary = "End point to send email notification",
-        description = "Send email notification",
+        summary = "API to Send Email Notification",
+        description = "Send Email Notification",
         responses = {
-            @ApiResponse(
-                description = "Success",
-                responseCode = "204"
-            ),
-            @ApiResponse(
-                description = "Unauthenticated",
-                responseCode = "401"
-            ),
-            @ApiResponse(
-                description = "Forbidden",
-                responseCode = "403"
-            ),
-            @ApiResponse(
-                description = "Internal server error",
-                responseCode = "500"
-            )
+            @ApiResponse(description = "Success", responseCode = "204"),
+            @ApiResponse(description = "Unauthenticated", responseCode = "401"),
+            @ApiResponse(description = "Forbidden", responseCode = "403"),
+            @ApiResponse(description = "Internal server error", responseCode = "500")
         }
     )
     @PostMapping("/send")
