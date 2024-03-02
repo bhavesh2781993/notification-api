@@ -5,11 +5,11 @@ import org.springframework.stereotype.Service;
 
 import in.digiborn.api.notification.models.EmailNotification;
 
+@Setter
 @Service
-class EmailNotificationContext {
+public class EmailNotificationContext {
 
-    @Setter
-    EmailNotificationStrategy emailNotificationStrategy;
+    private EmailNotificationStrategy emailNotificationStrategy;
 
     void send(final EmailNotification emailNotification) {
         emailNotificationStrategy.send(emailNotification);

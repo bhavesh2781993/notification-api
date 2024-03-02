@@ -11,12 +11,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import in.digiborn.api.notification.exceptions.TemplateException;
+import in.digiborn.api.notification.exceptions.TemplateFormatException;
+import in.digiborn.api.notification.mappers.TemplateMapper;
 import in.digiborn.api.notification.models.Template;
+import in.digiborn.api.notification.models.entities.TemplateEntity;
 import in.digiborn.api.notification.services.TemplateService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 @Tag(name = "Template APIs")
 @RequiredArgsConstructor
@@ -24,6 +27,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RequestMapping("/templates")
 public class TemplateController {
 
+    private final TemplateMapper templateMapper;
     private final TemplateService templateService;
 
     @Operation(
@@ -37,9 +41,10 @@ public class TemplateController {
         }
     )
     @PostMapping
-    public ResponseEntity<Template> createTemplate(@RequestBody final Template template) {
-        final Template createdTemplate = templateService.createTemplate(template);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdTemplate);
+    public ResponseEntity<TemplateEntity> createTemplate(@RequestBody @Valid final Template template) {
+        final TemplateEntity templateEntity = templateMapper.toCustomTemplateEntity(template);
+        final TemplateEntity createdTemplateEntity = templateService.createTemplate(templateEntity);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdTemplateEntity);
     }
 
     @Operation(
@@ -54,9 +59,10 @@ public class TemplateController {
     )
     @GetMapping("/{templateId}")
     public ResponseEntity<Template> getTemplate(@PathVariable final Long templateId) {
-        final Template matchingTemplate = templateService.getTemplate(templateId)
-            .orElseThrow(() -> new TemplateException("Template not found with templateId: " + templateId));
-        return ResponseEntity.ok(matchingTemplate);
+        final TemplateEntity matchingTemplateEntity = templateService.findTemplate(templateId)
+            .orElseThrow(() -> new TemplateFormatException("Template not found with templateId: " + templateId));
+        final Template response = templateMapper.toTemplate(matchingTemplateEntity);
+        return ResponseEntity.ok(response);
     }
 
     @Operation(

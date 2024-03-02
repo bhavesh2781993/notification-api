@@ -8,6 +8,9 @@ import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
+import in.digiborn.api.notification.utils.ErrorMessage;
+import jakarta.validation.constraints.NotEmpty;
+
 @Getter
 @Setter
 @SuperBuilder
@@ -15,8 +18,31 @@ import java.util.List;
 @AllArgsConstructor
 public class EmailNotification extends Notification {
 
-    private List<String> to;
-    private List<String> cc;
-    private List<String> bcc;
+    @NotEmpty(message = ErrorMessage.ERR_FIELD_CAN_NOT_BE_EMPTY)
+    private List<EmailRecipient> to;
+
+    private List<EmailRecipient> cc;
+
+    private List<EmailRecipient> bcc;
+
+    private String body;
+
+    public List<String> getToEmailIds() {
+        return extractEmailList(to);
+    }
+
+    public List<String> getCCEmailIds() {
+        return extractEmailList(cc);
+    }
+
+    public List<String> getBCCEmailIds() {
+        return extractEmailList(bcc);
+    }
+
+    private List<String> extractEmailList(final List<EmailRecipient> recipients) {
+        return recipients.stream()
+            .map(EmailRecipient::getEmail)
+            .toList();
+    }
 
 }

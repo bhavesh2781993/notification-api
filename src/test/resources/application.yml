@@ -22,3 +22,7 @@ spring.mail:
 notification:
   email:
     from: test@gmail.com
+
+cors:
+  allowed:
+    origins: http://localhost:4200

@@ -1,4 +1,4 @@
-package in.digiborn.api.notification.models.constants;
+package in.digiborn.api.notification.models.enums;
 
 public enum NotificationType {
 

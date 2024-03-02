@@ -3,3 +3,18 @@ server.port: 9090
 spring.profiles.active: docker
 spring.application.name: notification-api
 spring.freemarker.suffix: .ftlh
+
+# Email Server Configurations
+spring.mail:
+  host: ${EMAIL_SERVER_HOST}
+  port: ${EMAIL_SERVER_PORT}
+  username: ${EMAIL_USERNAME}
+  password: ${EMAIL_PASSWORD}
+  properties:
+    mail.smtp:
+      auth: true
+      starttls.enabled: true
+
+cors:
+  allowed:
+    origins: http://localhost:4200,http://localhost:4300

@@ -6,14 +6,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.io.StringWriter;
-
-import freemarker.template.Configuration;
-import freemarker.template.TemplateException;
 import in.digiborn.api.notification.configs.NotificationProperties;
 import in.digiborn.api.notification.models.EmailNotification;
-import in.digiborn.api.notification.models.Template;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 
@@ -24,35 +18,27 @@ public class JavaMailNotificationStrategy implements EmailNotificationStrategy {
 
     private final JavaMailSender emailSender;
     private final NotificationProperties notificationProperties;
-    private final Configuration freemarkerConfiguration;
 
     @Override
     public void send(final EmailNotification notification) {
         log.info("Inside send email notification service: {}", notification);
-        final String[] toList = notification.getTo().toArray(String[]::new);
-        final String[] ccList = notification.getCc().toArray(String[]::new);
-        final String[] bccList = notification.getBcc().toArray(String[]::new);
+        final String[] toList = notification.getToEmailIds().toArray(String[]::new);
+        final String[] ccList = notification.getCCEmailIds().toArray(String[]::new);
+        final String[] bccList = notification.getBCCEmailIds().toArray(String[]::new);
 
         final MimeMessage mimeMessage = emailSender.createMimeMessage();
         final MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
         try {
             mimeMessageHelper.setFrom(notificationProperties.getEmail().getFrom());
-            mimeMessageHelper.setTo(toList);
             mimeMessageHelper.setSubject(notification.getTitle());
+            mimeMessageHelper.setTo(toList);
             mimeMessageHelper.setCc(ccList);
             mimeMessageHelper.setBcc(bccList);
-            mimeMessageHelper.setText(getEmailContent(notification), true);
-        } catch (final MessagingException | IOException | TemplateException e) {
+            mimeMessageHelper.setText(notification.getBody(), true);
+        } catch (final MessagingException e) {
             log.error("Error sending mail: ", e);
         }
         emailSender.send(mimeMessage);
-    }
-
-    private String getEmailContent(final EmailNotification notification) throws IOException, TemplateException {
-        final Template template = notification.getTemplate();
-        final StringWriter stringWriter = new StringWriter();
-        freemarkerConfiguration.getTemplate(template.getName() + ".ftlh").process(template.getBodyVars(), stringWriter);
-        return stringWriter.getBuffer().toString();
     }
 
 }
