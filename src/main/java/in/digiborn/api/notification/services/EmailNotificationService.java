@@ -6,11 +6,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 import in.digiborn.api.notification.exceptions.DataNotFoundException;
+import in.digiborn.api.notification.mappers.EmailNotificationMapper;
 import in.digiborn.api.notification.mappers.TemplateMapper;
 import in.digiborn.api.notification.models.EmailNotification;
 import in.digiborn.api.notification.models.EmailRecipient;
 import in.digiborn.api.notification.models.Template;
 import in.digiborn.api.notification.models.entities.TemplateEntity;
+import in.digiborn.api.notification.models.requests.GenericEmailRequest;
 import in.digiborn.api.notification.models.requests.PersonalisedEmailRequest;
 
 @RequiredArgsConstructor
@@ -18,10 +20,12 @@ import in.digiborn.api.notification.models.requests.PersonalisedEmailRequest;
 public class EmailNotificationService {
 
     private final EmailNotificationManager emailNotificationManager;
+    private final EmailNotificationMapper emailNotificationMapper;
     private final TemplateService templateService;
     private final TemplateMapper templateMapper;
 
-    public void sendGenericEmail(final EmailNotification emailNotification) {
+    public void sendGenericEmail(final GenericEmailRequest genericEmailRequest) {
+        final EmailNotification emailNotification = emailNotificationMapper.toEmailNotification(genericEmailRequest);
         emailNotificationManager.send(emailNotification);
     }
 

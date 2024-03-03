@@ -15,6 +15,12 @@ spring.mail:
       auth: true
       starttls.enabled: true
 
+# Allowed CORS Origins
 cors:
   allowed:
     origins: http://localhost:4200,http://localhost:4300
+
+# Data Migration
+spring.flyway:
+  enabled: true
+  locations: classpath:db/migration/{vendor}

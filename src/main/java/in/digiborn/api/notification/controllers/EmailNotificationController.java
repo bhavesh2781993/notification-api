@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import in.digiborn.api.notification.mappers.EmailNotificationMapper;
-import in.digiborn.api.notification.models.EmailNotification;
 import in.digiborn.api.notification.models.requests.GenericEmailRequest;
 import in.digiborn.api.notification.models.requests.PersonalisedEmailRequest;
 import in.digiborn.api.notification.services.EmailNotificationService;
@@ -24,11 +22,11 @@ import jakarta.validation.Valid;
 public class EmailNotificationController {
 
     private final EmailNotificationService emailNotificationService;
-    private final EmailNotificationMapper emailNotificationMapper;
+
 
     @Operation(
         summary = "API to Send Email Notification",
-        description = "Send Email Notification",
+        description = "Send email notification",
         responses = {
             @ApiResponse(description = "Success", responseCode = "204"),
             @ApiResponse(description = "Unauthenticated", responseCode = "401"),
@@ -38,14 +36,13 @@ public class EmailNotificationController {
     )
     @PostMapping("/generic")
     public ResponseEntity<Void> sendGenericEmail(@RequestBody @Valid final GenericEmailRequest genericEmailRequest) {
-        final EmailNotification emailNotification = emailNotificationMapper.toEmailNotification(genericEmailRequest);
-        emailNotificationService.sendGenericEmail(emailNotification);
+        emailNotificationService.sendGenericEmail(genericEmailRequest);
         return ResponseEntity.noContent().build();
     }
 
     @Operation(
         summary = "API to Send Email Notification",
-        description = "Send Email Notification",
+        description = "Send email notification",
         responses = {
             @ApiResponse(description = "Success", responseCode = "204"),
             @ApiResponse(description = "Unauthenticated", responseCode = "401"),
@@ -55,7 +52,6 @@ public class EmailNotificationController {
     )
     @PostMapping("/personalized")
     public ResponseEntity<Void> sendPersonalizedEmail(@RequestBody @Valid final PersonalisedEmailRequest personalisedEmailRequest) {
-        final EmailNotification emailNotification = emailNotificationMapper.toEmailNotification(personalisedEmailRequest);
         emailNotificationService.sendPersonalizedEmail(personalisedEmailRequest);
         return ResponseEntity.noContent().build();
     }

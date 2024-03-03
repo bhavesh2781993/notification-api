@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import in.digiborn.api.notification.exceptions.TemplateFormatException;
+import in.digiborn.api.notification.exceptions.DataNotFoundException;
 import in.digiborn.api.notification.mappers.TemplateMapper;
 import in.digiborn.api.notification.models.Template;
 import in.digiborn.api.notification.models.entities.TemplateEntity;
@@ -32,9 +32,9 @@ public class TemplateController {
 
     @Operation(
         summary = "API to Create Template",
-        description = "Create Template",
+        description = "Create template",
         responses = {
-            @ApiResponse(description = "Success", responseCode = "204"),
+            @ApiResponse(description = "Created", responseCode = "201"),
             @ApiResponse(description = "Unauthenticated", responseCode = "401"),
             @ApiResponse(description = "Forbidden", responseCode = "403"),
             @ApiResponse(description = "Internal server error", responseCode = "500")
@@ -49,25 +49,26 @@ public class TemplateController {
 
     @Operation(
         summary = "API to Fetch Template",
-        description = "Fetch Template",
+        description = "Fetch template",
         responses = {
-            @ApiResponse(description = "Success", responseCode = "204"),
+            @ApiResponse(description = "Success", responseCode = "200"),
             @ApiResponse(description = "Unauthenticated", responseCode = "401"),
             @ApiResponse(description = "Forbidden", responseCode = "403"),
+            @ApiResponse(description = "Not Found", responseCode = "404"),
             @ApiResponse(description = "Internal server error", responseCode = "500")
         }
     )
     @GetMapping("/{templateId}")
     public ResponseEntity<Template> getTemplate(@PathVariable final Long templateId) {
         final TemplateEntity matchingTemplateEntity = templateService.findTemplate(templateId)
-            .orElseThrow(() -> new TemplateFormatException("Template not found with templateId: " + templateId));
+            .orElseThrow(() -> new DataNotFoundException("Template not found with templateId: " + templateId));
         final Template response = templateMapper.toTemplate(matchingTemplateEntity);
         return ResponseEntity.ok(response);
     }
 
     @Operation(
         summary = "API to Delete Template",
-        description = "Delete Template",
+        description = "Delete template",
         responses = {
             @ApiResponse(description = "Success", responseCode = "204"),
             @ApiResponse(description = "Unauthenticated", responseCode = "401"),

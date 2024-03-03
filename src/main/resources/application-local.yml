@@ -1,18 +1,25 @@
 # Database Connection
-spring:
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/notificationdb?prepareThreshold=0
-    username: notification-api
-    password: notification
-  jpa:
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
-    generate-ddl: true
-    hibernate:
-      ddl-auto: update
+spring.datasource:
+  driver-class-name: org.postgresql.Driver
+  url: jdbc:postgresql://localhost:5432/notificationdb_flyway?prepareThreshold=0
+  username: notification-api
+  password: notification
+
+spring.jpa:
+  show-sql: true
+#  generate-ddl: true
+#  hibernate.ddl-auto: update
+#  properties:
+#    jakarta.persistence.schema-generation:
+#      create-source: metadata
+#      scripts:
+#        action: create
+#        create-target: update-script.sql
+#    hibernate:
+#      format_sql: true
+
+# Data Migration
+spring.flyway.enabled: true
 
 # Email Configurations
 spring.mail:
