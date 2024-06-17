@@ -4,6 +4,6 @@ WORKDIR /app
 
 COPY target/*.jar db-notification-api.jar
 
-EXPOSE 9090
+EXPOSE 8080
 
 ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /app/db-notification-api.jar"]

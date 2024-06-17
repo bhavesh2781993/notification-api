@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import in.digiborn.api.notification.models.requests.GenericEmailRequest;
+import in.digiborn.api.notification.models.requests.BroadcastEmailRequest;
 import in.digiborn.api.notification.models.requests.PersonalisedEmailRequest;
 import in.digiborn.api.notification.services.EmailNotificationService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -34,9 +34,9 @@ public class EmailNotificationController {
             @ApiResponse(description = "Internal server error", responseCode = "500")
         }
     )
-    @PostMapping("/generic")
-    public ResponseEntity<Void> sendGenericEmail(@RequestBody @Valid final GenericEmailRequest genericEmailRequest) {
-        emailNotificationService.sendGenericEmail(genericEmailRequest);
+    @PostMapping("/broadcast")
+    public ResponseEntity<Void> sendBroadcastEmail(@RequestBody @Valid final BroadcastEmailRequest broadcastEmailRequest) {
+        emailNotificationService.sendBroadcastEmail(broadcastEmailRequest);
         return ResponseEntity.noContent().build();
     }
 

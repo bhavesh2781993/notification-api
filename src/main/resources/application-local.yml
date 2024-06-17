@@ -1,7 +1,7 @@
 # Database Connection
 spring.datasource:
   driver-class-name: org.postgresql.Driver
-  url: jdbc:postgresql://localhost:5432/notificationdb_flyway?prepareThreshold=0
+  url: jdbc:postgresql://localhost:5433/notificationdb?prepareThreshold=0
   username: notification-api
   password: notification
 
@@ -25,9 +25,10 @@ spring.flyway.enabled: true
 spring.mail:
   host: sandbox.smtp.mailtrap.io
   port: 587
+  username: 59cba66d348770
+  password: 2252be0aaa4a3f
 
 # Sender Email ID
 notification:
   email:
     from: test@gmail.com
-

@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import in.digiborn.api.notification.exceptions.ClientNotFoundException;
 import in.digiborn.api.notification.exceptions.DataNotFoundException;
 import in.digiborn.api.notification.exceptions.NotificationException;
 import in.digiborn.api.notification.exceptions.TemplateFormatException;
@@ -22,10 +23,10 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
     }
 
-    @ExceptionHandler(TemplateFormatException.class)
-    public ResponseEntity<ErrorResponse> handleTemplateFormatException(final TemplateFormatException templateFormatException) {
-        log.error("Template Format Exception: ", templateFormatException);
-        final ErrorResponse errorResponse = new ErrorResponse(templateFormatException.getMessage());
+    @ExceptionHandler({TemplateFormatException.class, ClientNotFoundException.class})
+    public ResponseEntity<ErrorResponse> handleTemplateFormatException(final RuntimeException runtimeException) {
+        log.error("Template Format Exception: ", runtimeException);
+        final ErrorResponse errorResponse = new ErrorResponse(runtimeException.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
 

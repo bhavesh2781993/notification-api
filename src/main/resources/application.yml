@@ -1,8 +1,4 @@
-server.port: 9090
-
-spring.profiles.active: docker
 spring.application.name: notification-api
-spring.freemarker.suffix: .ftlh
 
 # Email Server Configurations
 spring.mail:
@@ -15,10 +11,13 @@ spring.mail:
       auth: true
       starttls.enabled: true
 
-# Allowed CORS Origins
-cors:
-  allowed:
-    origins: http://localhost:4200,http://localhost:4300
+# Database Connection
+spring.datasource:
+  driver-class-name: org.postgresql.Driver
+  url: jdbc:postgresql://${DB_URL}:${DB_PORT}/${DB_SCHEMA}?prepareThreshold=0
+  username: ${DB_USERNAME}
+  password: ${DB_PASSWORD}
+
 
 # Data Migration
 spring.flyway:

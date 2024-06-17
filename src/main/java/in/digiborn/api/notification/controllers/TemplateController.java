@@ -41,10 +41,11 @@ public class TemplateController {
         }
     )
     @PostMapping
-    public ResponseEntity<TemplateEntity> createTemplate(@RequestBody @Valid final Template template) {
+    public ResponseEntity<Template> createTemplate(@RequestBody @Valid final Template template) {
         final TemplateEntity templateEntity = templateMapper.toCustomTemplateEntity(template);
         final TemplateEntity createdTemplateEntity = templateService.createTemplate(templateEntity);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdTemplateEntity);
+        final Template response = templateMapper.toTemplate(createdTemplateEntity);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @Operation(

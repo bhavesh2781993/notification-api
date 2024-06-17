@@ -12,7 +12,7 @@ import in.digiborn.api.notification.models.EmailNotification;
 import in.digiborn.api.notification.models.EmailRecipient;
 import in.digiborn.api.notification.models.Template;
 import in.digiborn.api.notification.models.entities.TemplateEntity;
-import in.digiborn.api.notification.models.requests.GenericEmailRequest;
+import in.digiborn.api.notification.models.requests.BroadcastEmailRequest;
 import in.digiborn.api.notification.models.requests.PersonalisedEmailRequest;
 
 @RequiredArgsConstructor
@@ -24,8 +24,8 @@ public class EmailNotificationService {
     private final TemplateService templateService;
     private final TemplateMapper templateMapper;
 
-    public void sendGenericEmail(final GenericEmailRequest genericEmailRequest) {
-        final EmailNotification emailNotification = emailNotificationMapper.toEmailNotification(genericEmailRequest);
+    public void sendBroadcastEmail(final BroadcastEmailRequest broadcastEmailRequest) {
+        final EmailNotification emailNotification = emailNotificationMapper.toEmailNotification(broadcastEmailRequest);
         emailNotificationManager.send(emailNotification);
     }
 

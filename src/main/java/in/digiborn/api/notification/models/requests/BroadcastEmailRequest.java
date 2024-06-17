@@ -15,7 +15,7 @@ import jakarta.validation.constraints.NotEmpty;
 
 @Getter
 @Setter
-public class GenericEmailRequest {
+public class BroadcastEmailRequest {
 
     @Valid
     @NotEmpty(message = ERR_FIELD_CAN_NOT_BE_EMPTY)
