@@ -25,8 +25,8 @@ public class EmailNotificationController {
 
 
     @Operation(
-        summary = "API to Send Email Notification",
-        description = "Send email notification",
+        summary = "API to Send Broadcast Email Notification",
+        description = "Send email notification to group of people. This behaves as a broadcast and doesn't require template to be created",
         responses = {
             @ApiResponse(description = "Success", responseCode = "204"),
             @ApiResponse(description = "Unauthenticated", responseCode = "401"),
@@ -41,8 +41,8 @@ public class EmailNotificationController {
     }
 
     @Operation(
-        summary = "API to Send Email Notification",
-        description = "Send email notification",
+        summary = "API to Send Personal Email Notification",
+        description = "Send personalized email notification to group of people. This needs template to be created.",
         responses = {
             @ApiResponse(description = "Success", responseCode = "204"),
             @ApiResponse(description = "Unauthenticated", responseCode = "401"),
