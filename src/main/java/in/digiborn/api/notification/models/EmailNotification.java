@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.springframework.util.CollectionUtils;
 
+import java.util.Collections;
 import java.util.List;
 
 import in.digiborn.api.notification.utils.ErrorMessage;
@@ -40,9 +42,12 @@ public class EmailNotification extends Notification {
     }
 
     private List<String> extractEmailList(final List<EmailRecipient> recipients) {
-        return recipients.stream()
-            .map(EmailRecipient::getEmail)
-            .toList();
+        if (!CollectionUtils.isEmpty(recipients)) {
+            return recipients.stream()
+                .map(EmailRecipient::getEmail)
+                .toList();
+        }
+        return Collections.emptyList();
     }
 
 }
