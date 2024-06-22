@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import in.digiborn.api.notification.exceptions.ClientNotFoundException;
 import in.digiborn.api.notification.exceptions.DataNotFoundException;
@@ -35,6 +36,11 @@ public class GlobalExceptionHandler {
         log.error("Data Not Found Exception: ", dataNotFoundException);
         final ErrorResponse errorResponse = new ErrorResponse(dataNotFoundException.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+    }
+
+    @ExceptionHandler(NoResourceFoundException.class)
+    public void handleResourceNotFoundException(final NoResourceFoundException e) {
+        log.info("NoResourceFoundException: {}", e.getMessage());
     }
 
     @ExceptionHandler(Exception.class)
