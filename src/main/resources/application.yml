@@ -11,6 +11,11 @@ spring.mail:
       auth: true
       starttls.enabled: true
 
+# Sender Email ID
+notification:
+  email:
+    from: info@digiborn.in
+
 # Database Connection
 spring.datasource:
   driver-class-name: org.postgresql.Driver

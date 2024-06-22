@@ -1,8 +1,3 @@
-# Sender Email ID
-notification:
-  email:
-    from: digiborn101@gmail.com
-
 # Allowed CORS Origins
 cors:
   allowed:

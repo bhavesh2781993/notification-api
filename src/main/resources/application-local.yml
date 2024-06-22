@@ -28,11 +28,6 @@ spring.mail:
   username: 59cba66d348770
   password: 2252be0aaa4a3f
 
-# Sender Email ID
-notification:
-  email:
-    from: test@gmail.com
-
 # Allowed CORS Origins
 cors:
   allowed:
