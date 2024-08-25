@@ -21,7 +21,7 @@ public class JavaMailNotificationStrategy implements EmailNotificationStrategy {
 
     @Override
     public void send(final EmailNotification notification) {
-        log.info("Inside send email notification service: {}", notification);
+        log.info("Sending email notification to: {}", notification);
         final String[] toList = notification.getToEmailIds().toArray(String[]::new);
         final String[] ccList = notification.getCCEmailIds().toArray(String[]::new);
         final String[] bccList = notification.getBCCEmailIds().toArray(String[]::new);

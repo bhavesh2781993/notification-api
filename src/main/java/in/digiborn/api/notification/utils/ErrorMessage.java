@@ -1,10 +1,8 @@
 package in.digiborn.api.notification.utils;
 
-import static lombok.AccessLevel.PRIVATE;
+import lombok.experimental.UtilityClass;
 
-import lombok.NoArgsConstructor;
-
-@NoArgsConstructor(access = PRIVATE)
+@UtilityClass
 public class ErrorMessage {
 
     public static final String ERR_FIELD_CAN_NOT_BE_BLANK = "Field can't be blank";

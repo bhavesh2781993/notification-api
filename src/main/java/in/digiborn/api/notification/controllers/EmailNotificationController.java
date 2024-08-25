@@ -15,14 +15,13 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
+@Tag(name = "Email Notification APIs")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/email")
-@Tag(name = "Email Notification APIs")
 public class EmailNotificationController {
 
     private final EmailNotificationService emailNotificationService;
-
 
     @Operation(
         summary = "API to Send Broadcast Email Notification",

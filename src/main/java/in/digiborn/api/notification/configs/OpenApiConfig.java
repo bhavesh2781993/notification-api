@@ -18,7 +18,7 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
         version = "0.0.1",
         description = "Send Email / SMS Notification",
         contact = @Contact(
-            name = "Bhavesh Shah",
+            name = "Zeel Shah",
             email = "info@digiborn.in",
             url = "https://www.digiborn.in"
         ),
